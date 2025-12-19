@@ -1,6 +1,6 @@
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import ContactForm from '@/components/ContactForm'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import ContactForm from '../../components/ContactForm'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
