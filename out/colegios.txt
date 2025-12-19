@@ -1,4 +1,4 @@
-0:["OkbxDOF0Og6xHG_g-dBDG",[[["",{"children":["colegios",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
+0:["WBZaC4ic0pOsejPyEK5JN",[[["",{"children":["colegios",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
 3:I[6954,[],""]
 4:I[7264,[],""]
 6:I[8326,["375","static/chunks/375-66960eedd59924db.js","213","static/chunks/app/colegios/page-e716084ca5f174f1.js"],""]
