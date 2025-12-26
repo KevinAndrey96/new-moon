@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { CONTACT_INFO, ROUTES } from '../lib/constants'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -15,21 +16,21 @@ export default function Footer() {
                   <li>
                     <span className="icon icon-map-marker"></span>
                     <span className="text">
-                      <a href="https://maps.app.goo.gl/Sd3o52KcQo84pDrb6" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,.7)' }}>
-                        Calle 103 # 14a-53, Of. 303, Bogotá
+                      <a href={CONTACT_INFO.mapsLink} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,.7)' }}>
+                        {CONTACT_INFO.address}
                       </a>
                     </span>
                   </li>
                   <li>
-                    <a href="tel:+573112940918">
+                    <a href={CONTACT_INFO.phoneLink}>
                       <span className="icon icon-phone"></span>
-                      <span className="text">+57 311 294 0918</span>
+                      <span className="text">{CONTACT_INFO.phone}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:info@nmpsicologiaenevolucion.com">
+                    <a href={CONTACT_INFO.emailLink}>
                       <span className="icon icon-envelope"></span>
-                      <span className="text">info@nmpsicologiaenevolucion.com</span>
+                      <span className="text">{CONTACT_INFO.email}</span>
                     </a>
                   </li>
                 </ul>
@@ -42,17 +43,27 @@ export default function Footer() {
               <h2 className="ftco-heading-2">Enlaces</h2>
               <ul className="list-unstyled">
                 <li>
-                  <Link href="/">
+                  <Link href={ROUTES.home}>
                     <span className="ion-ios-arrow-round-forward mr-2"></span>Inicio
                   </Link>
                 </li>
                 <li>
-                  <Link href="/colegios">
+                  <Link href={ROUTES.nosotros}>
+                    <span className="ion-ios-arrow-round-forward mr-2"></span>Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link href={ROUTES.colegios}>
                     <span className="ion-ios-arrow-round-forward mr-2"></span>Para Colegios
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact">
+                  <Link href={ROUTES.empresas}>
+                    <span className="ion-ios-arrow-round-forward mr-2"></span>Para Empresas
+                  </Link>
+                </li>
+                <li>
+                  <Link href={ROUTES.contact}>
                     <span className="ion-ios-arrow-round-forward mr-2"></span>Contacto
                   </Link>
                 </li>

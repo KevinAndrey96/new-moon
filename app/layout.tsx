@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import WhatsAppButton from '../components/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: 'New Moon - Psicología en Evolución | Salud Mental Integral',
@@ -14,6 +15,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-S7VK71NQKC'
+
   return (
     <html lang="es">
       <head>
@@ -33,6 +36,21 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <WhatsAppButton />
+        
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+          `}
+        </Script>
         
         {/* Scripts */}
         <Script src="/js/jquery.min.js" strategy="beforeInteractive" />
@@ -47,8 +65,8 @@ export default function RootLayout({
         <Script src="/js/aos.js" strategy="afterInteractive" />
         <Script src="/js/jquery.animateNumber.min.js" strategy="afterInteractive" />
         <Script src="/js/scrollax.min.js" strategy="afterInteractive" />
-        <Script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false" strategy="afterInteractive" />
-        <Script src="/js/google-map.js" strategy="afterInteractive" />
+        {/* Google Maps is loaded dynamically by GoogleMap component */}
+        {/* <Script src="/js/google-map.js" strategy="afterInteractive" /> */}
         <Script src="/js/main.js" strategy="afterInteractive" />
       </body>
     </html>

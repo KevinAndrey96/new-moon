@@ -1,7 +1,20 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { CONTACT_INFO, ROUTES } from '../lib/constants'
 
 export default function Header() {
+  const pathname = usePathname()
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/'
+    }
+    return pathname?.startsWith(path)
+  }
+
   return (
     <>
       <div className="py-2 bg-primary">
@@ -14,8 +27,8 @@ export default function Header() {
                     <span className="icon-map"></span>
                   </div>
                   <span className="text">
-                    <a href="https://maps.app.goo.gl/Sd3o52KcQo84pDrb6" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,.7)' }}>
-                      Calle 103 # 14a-53, Of. 303, Bogotá
+                    <a href={CONTACT_INFO.mapsLink} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,.7)' }}>
+                      {CONTACT_INFO.address}
                     </a>
                   </span>
                 </div>
@@ -24,8 +37,8 @@ export default function Header() {
                     <span className="icon-paper-plane"></span>
                   </div>
                   <span className="text">
-                    <a href="mailto:info@nmpsicologiaenevolucion.com" style={{ color: 'rgba(255,255,255,.7)' }}>
-                      info@nmpsicologiaenevolucion.com
+                    <a href={CONTACT_INFO.emailLink} style={{ color: 'rgba(255,255,255,.7)' }}>
+                      {CONTACT_INFO.email}
                     </a>
                   </span>
                 </div>
@@ -34,8 +47,8 @@ export default function Header() {
                     <span className="icon-phone2"></span>
                   </div>
                   <span className="text">
-                    <a href="tel:+573112940918" style={{ color: 'rgba(255,255,255,.7)' }}>
-                      +57 311 294 0918
+                    <a href={CONTACT_INFO.phoneLink} style={{ color: 'rgba(255,255,255,.7)' }}>
+                      {CONTACT_INFO.phone}
                     </a>
                   </span>
                 </div>
@@ -69,14 +82,20 @@ export default function Header() {
           </button>
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <Link href="/" className="nav-link pl-0">Inicio</Link>
+              <li className={`nav-item ${isActive(ROUTES.home) ? 'active' : ''}`}>
+                <Link href={ROUTES.home} className="nav-link pl-0">Inicio</Link>
               </li>
-              <li className="nav-item">
-                <Link href="/colegios" className="nav-link">Para Colegios</Link>
+              <li className={`nav-item ${isActive(ROUTES.nosotros) ? 'active' : ''}`}>
+                <Link href={ROUTES.nosotros} className="nav-link">Nosotros</Link>
               </li>
-              <li className="nav-item">
-                <Link href="/contact" className="nav-link">Contacto</Link>
+              <li className={`nav-item ${isActive(ROUTES.colegios) ? 'active' : ''}`}>
+                <Link href={ROUTES.colegios} className="nav-link">Para Colegios</Link>
+              </li>
+              <li className={`nav-item ${isActive(ROUTES.empresas) ? 'active' : ''}`}>
+                <Link href={ROUTES.empresas} className="nav-link">Para Empresas</Link>
+              </li>
+              <li className={`nav-item ${isActive(ROUTES.contact) ? 'active' : ''}`}>
+                <Link href={ROUTES.contact} className="nav-link">Contacto</Link>
               </li>
             </ul>
           </div>

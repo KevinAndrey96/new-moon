@@ -4,8 +4,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Alianza Estratégica para Colegios - New Moon Psicología en Evolución',
-  description: 'Alianza estratégica exclusiva de neuropsicología de referencia para colegios. Costo operacional cero. Soporte especializado para su institución educativa.',
+  title: 'Modelo Integral de Acompañamiento Psicoeducativo y Bienestar Escolar - New Moon',
+  description: 'Modelo integral de atención en bienestar, neuropsicología y salud mental para colegios y universidades. Acompañamiento psicoeducativo orientado a la inclusión, bienestar emocional y convivencia escolar.',
 }
 
 export default function ColegiosPage() {
@@ -19,7 +19,7 @@ export default function ColegiosPage() {
           <div className="row no-gutters slider-text align-items-center justify-content-center">
             <div className="col-md-9 ftco-animate text-center">
               <h1 className="mb-2 bread" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
-                Alianza Estratégica para Colegios
+                Modelo Integral de Acompañamiento Psicoeducativo y Bienestar Escolar
               </h1>
               <p className="breadcrumbs">
                 <span className="mr-2">
@@ -37,20 +37,29 @@ export default function ColegiosPage() {
           <div className="row">
             <div className="col-md-12 wrap-about py-5 pr-md-4 ftco-animate">
               <h2 className="mb-4" style={{ textAlign: 'center' }}>
-                Neuropsicología de Referencia: <span style={{ color: '#ff6b35' }}>Costo Operacional Cero</span>
+                Modelo Integral de Atención en <span style={{ color: '#ff6b35' }}>Bienestar y Salud Mental</span>
               </h2>
               <p style={{ textAlign: 'justify', fontSize: '18px', lineHeight: '1.8', marginBottom: '30px' }}>
-                Su institución enfrenta diariamente el reto de los trastornos de neurodesarrollo como{' '}
-                <strong>discapacidad intelectual, autismo, problemas de atención, dificultades de aprendizaje, dificultades de lenguaje</strong>{' '}
-                y el impacto del comportamiento en el aula. Estos casos detienen el avance académico y agotan a su equipo docente.
+                <strong>New Moon Psicología en Evolución S.A.S.</strong> ofrece un modelo integral de atención en bienestar, neuropsicología y salud mental, orientado al acompañamiento institucional y al desarrollo humano de su institución educativa.
               </p>
               
-              <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #ff6b35 100%)', padding: '40px', borderRadius: '15px', color: 'white', marginBottom: 0 }}>
+              <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #ff6b35 100%)', padding: '40px', borderRadius: '15px', color: 'white', marginBottom: '30px' }}>
                 <h3 className="mb-4" style={{ color: 'white', textAlign: 'center' }}>
-                  New Moon ofrece una <span style={{ fontSize: '1.2em' }}>Alianza Estratégica INMEDIATA</span> para resolver esta complejidad
+                  Enfoque del <span style={{ fontSize: '1.2em' }}>Servicio</span>
                 </h3>
                 <p style={{ textAlign: 'center', color: 'white', fontSize: '18px', marginBottom: 0 }}>
-                  Como Especialistas en Neuropsicología, garantizamos a su colegio una solución de alto valor a cambio de una referencia exclusiva.
+                  Acompañamiento psicoeducativo orientado a la inclusión, el bienestar emocional, el desempeño académico y la convivencia escolar, articulado con familias y docentes.
+                </p>
+              </div>
+
+              <div style={{ background: '#f8f9fa', padding: '30px', borderRadius: '15px', marginBottom: 0 }}>
+                <h3 className="mb-3" style={{ color: '#1e3a5f', textAlign: 'center' }}>
+                  Neuropsicología de Referencia: <span style={{ color: '#ff6b35' }}>Costo Operacional Cero</span>
+                </h3>
+                <p style={{ textAlign: 'justify', fontSize: '16px', lineHeight: '1.8', marginBottom: 0 }}>
+                  Su institución enfrenta diariamente el reto de los trastornos de neurodesarrollo como{' '}
+                  <strong>discapacidad intelectual, autismo, problemas de atención, dificultades de aprendizaje, dificultades de lenguaje</strong>{' '}
+                  y el impacto del comportamiento en el aula. New Moon ofrece una <strong>Alianza Estratégica INMEDIATA</strong> para resolver esta complejidad, garantizando a su colegio una solución de alto valor a cambio de una referencia exclusiva.
                 </p>
               </div>
             </div>
@@ -169,43 +178,60 @@ export default function ColegiosPage() {
                       <span className="flaticon-education" style={{ color: 'white', fontSize: '24px' }}></span>
                     </div>
                     <div className="text">
-                      <h4 style={{ marginBottom: '10px' }}>Acceso Preferencial para Familias</h4>
+                      <h4 style={{ marginBottom: '10px' }}>Servicios Complementarios de Bienestar</h4>
                       <p style={{ textAlign: 'justify', marginBottom: 0 }}>
-                        Los padres de los estudiantes del colegio tendrán acceso directo y preferencial a nuestros servicios de evaluación neuropsicológica y rehabilitación, con descuentos por la exclusividad del colegio referente.
+                        Consultorías, asesorías y servicios complementarios para el desarrollo de estrategias de bienestar escolar, inclusión educativa y salud mental institucional.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-6 order-md-last wrap-about py-5 wrap-about bg-light">
+            <div className="col-md-6 order-md-first wrap-about py-5 wrap-about bg-light" style={{ marginTop: '2rem' }}>
               <div className="text px-4 ftco-animate">
-                <h2 className="mb-4">Beneficios para <span>Su Colegio</span></h2>
+                <h2 className="mb-4">Marco Ético y <span>Normativo</span></h2>
                 <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
                     <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Diagnósticos Precisos:</strong>
-                    <span style={{ display: 'block' }}>Identificación temprana de dificultades de aprendizaje y atención mediante evaluaciones especializadas.</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Intervenciones Responsables:</strong>
+                    <span style={{ display: 'block' }}>Todas nuestras intervenciones están basadas en buenas prácticas profesionales y evidencia científica.</span>
                   </li>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
                     <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Herramientas para Docentes:</strong>
-                    <span style={{ display: 'block' }}>Socialización de informes y estrategias personalizadas para cada estudiante.</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Alineación Normativa:</strong>
+                    <span style={{ display: 'block' }}>Nuestros servicios están alineados con lineamientos de salud mental, educación y bienestar institucional vigentes.</span>
                   </li>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
                     <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Apoyo para Familias:</strong>
-                    <span style={{ display: 'block' }}>Orientación y acompañamiento que mejora el rendimiento académico de los estudiantes.</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Confidencialidad y Respeto:</strong>
+                    <span style={{ display: 'block' }}>Garantizamos la confidencialidad, el respeto y un acompañamiento profesional en todos nuestros procesos.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-md-6 order-md-last wrap-about py-5 wrap-about bg-light">
+              <div className="text px-4 ftco-animate">
+                <h2 className="mb-4">Beneficios e <span>Impacto</span></h2>
+                <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
+                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Mejora del Clima Escolar y la Convivencia:</strong>
+                    <span style={{ display: 'block' }}>Estrategias que fortalecen las relaciones interpersonales, mejoran la comunicación y crean un ambiente escolar positivo y seguro.</span>
                   </li>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
                     <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Mejora de Resultados:</strong>
-                    <span style={{ display: 'block' }}>Mejoras significativas en el rendimiento escolar y el bienestar emocional de los alumnos.</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Apoyo a Procesos de Inclusión (PIAR, DUA):</strong>
+                    <span style={{ display: 'block' }}>Acompañamiento especializado en la implementación de Planes Individuales de Ajustes Razonables (PIAR) y Diseño Universal para el Aprendizaje (DUA).</span>
                   </li>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
                     <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Alcance Nacional:</strong>
-                    <span style={{ display: 'block' }}>Gracias a la tecnología, continuidad del servicio incluso con cambios en las condiciones (virtualidad, vacaciones, etc.).</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Fortalecimiento Socioemocional de Estudiantes:</strong>
+                    <span style={{ display: 'block' }}>Programas que desarrollan habilidades emocionales, sociales y de convivencia, mejorando el bienestar integral de los estudiantes.</span>
+                  </li>
+                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Orientación y Capacitación a Docentes y Familias:</strong>
+                    <span style={{ display: 'block' }}>Talleres, capacitaciones y acompañamiento continuo que fortalece las competencias de docentes y familias en el apoyo a los estudiantes.</span>
                   </li>
                 </ul>
                 <div className="mt-4" style={{ textAlign: 'center', paddingTop: '20px' }}>
@@ -225,10 +251,10 @@ export default function ColegiosPage() {
           <div className="row">
             <div className="col-md-8">
               <h2 style={{ color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
-                ¿Listo para transformar el apoyo a sus estudiantes?
+                ¿Listo para construir entornos de aprendizaje saludables e inclusivos?
               </h2>
               <p className="mb-0" style={{ color: 'white', textShadow: '1px 1px 2px rgba(0,0,0,0.7)', fontSize: '18px' }}>
-                Si desea que su institución tenga acceso a este soporte especializado y avance en el rendimiento académico de sus estudiantes desde ahora, solicitamos una reunión de 15 minutos para concretar la alianza.
+                Invitamos a las instituciones educativas a construir conjuntamente entornos de aprendizaje saludables, inclusivos y emocionalmente seguros. Solicitamos una reunión de 15 minutos para conocer sus necesidades y diseñar un programa personalizado.
               </p>
             </div>
             <div className="col-md-4 d-flex align-items-center justify-content-center">

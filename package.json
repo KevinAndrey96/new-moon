@@ -5,7 +5,7 @@
   "scripts": {
     "copy-assets": "mkdir -p public/css public/js public/images public/fonts && cp -r website/css/* public/css/ && cp -r website/js/* public/js/ && cp -r website/images/* public/images/ && cp -r website/fonts/* public/fonts/",
     "dev": "npm run copy-assets && next dev",
-    "build": "npm run copy-assets && next build",
+    "build": "npm run copy-assets && next build && cp .htaccess out/ 2>/dev/null || true",
     "start": "node start-server.js",
     "lint": "next lint"
   },

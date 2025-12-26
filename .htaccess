@@ -1,19 +1,15 @@
 RewriteEngine On
 
+# Remove trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# Serve .html files without extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
 # Don't proxy requests for static files that exist
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
-
-# Proxy all other requests to Node.js app
-# cPanel Node.js apps typically use a socket or internal port
-# Try these options one by one if the first doesn't work:
-
-# Option 1: Try common cPanel Node.js ports
-RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
-
-# Option 2: If 3000 doesn't work, try 3001 (uncomment and comment Option 1):
-# RewriteRule ^(.*)$ http://127.0.0.1:3001/$1 [P,L]
-
-# Option 3: If using socket (uncomment and comment others):
-# RewriteRule ^(.*)$ unix:/mnt/saturno/nmpsicologiaenev/nodevenv/repositories/new-moon/16/run/node.sock|http://127.0.0.1/$1 [P,L]
-
