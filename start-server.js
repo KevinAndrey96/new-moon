@@ -4,6 +4,22 @@
 const path = require('path');
 const fs = require('fs');
 
+const scriptDir = __dirname;
+const envFiles = [
+  path.join(scriptDir, '.env.production.local'),
+  path.join(scriptDir, '.env.local'),
+  path.join(scriptDir, '.env.production'),
+  path.join(scriptDir, '.env'),
+];
+
+for (const envFile of envFiles) {
+  if (fs.existsSync(envFile)) {
+    console.log(`Loading environment variables from: ${envFile}`);
+    require('dotenv').config({ path: envFile });
+    break;
+  }
+}
+
 // Debug mode - set DEBUG=true in environment variables to enable
 // Always enable debug in production to help diagnose issues
 const DEBUG = process.env.DEBUG === 'true' || process.env.NODE_ENV === 'development' || true;
@@ -15,9 +31,6 @@ if (DEBUG) {
   console.log('Node version:', process.version);
   console.log('NODE_ENV:', process.env.NODE_ENV);
 }
-
-// Get the directory where this script is located
-const scriptDir = __dirname;
 
 // Change to the script directory
 process.chdir(scriptDir);
