@@ -17,6 +17,12 @@ const EMAIL_TEMPLATES = [
     file: 'email_schools.html',
     description: 'Plantilla HTML para envío de marketing a colegios.',
   },
+  {
+    slug: 'colegios_febrero',
+    name: 'Propuesta neuropsicológica (colegios febrero)',
+    file: 'colegios-febrero/index.html',
+    description: 'Propuesta de apoyo neuropsicológico',
+  },
 ] as const
 
 export default function EmailsIndexPage() {

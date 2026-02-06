@@ -1,5 +1,6 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import MeetingRequestForm from '../../components/MeetingRequestForm'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
@@ -256,33 +257,7 @@ export default function EmpresasPage() {
                 <h2 className="mb-4">Solicite su Reunión de 15 Minutos</h2>
                 <p>Complete el formulario y nos pondremos en contacto con usted para agendar una reunión personalizada donde explicaremos todos los detalles de nuestro modelo integral de bienestar y salud mental laboral.</p>
               </div>
-              <form action="#" className="appointment-form ftco-animate">
-                <div className="d-md-flex">
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Nombre de la Empresa" required />
-                  </div>
-                  <div className="form-group ml-md-4">
-                    <input type="text" className="form-control" placeholder="Su Nombre" />
-                  </div>
-                </div>
-                <div className="d-md-flex">
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Cargo" />
-                  </div>
-                  <div className="form-group ml-md-4">
-                    <input type="text" className="form-control" placeholder="Teléfono" required />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <input type="email" className="form-control" placeholder="Email" required />
-                </div>
-                <div className="form-group">
-                  <textarea name="" id="" cols={30} rows={3} className="form-control" placeholder="Mensaje (opcional)"></textarea>
-                </div>
-                <div className="form-group">
-                  <input type="submit" value="Solicitar Reunión" className="btn btn-secondary py-3 px-5" style={{ width: '100%' }} />
-                </div>
-              </form>
+              <MeetingRequestForm source="empresas" />
             </div>
           </div>
         </div>

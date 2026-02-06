@@ -248,12 +248,15 @@
   });
 
 
-  $('.appointment_date').datepicker({
-	  'format': 'm/d/yyyy',
-	  'autoclose': true
-	});
-
-	$('.appointment_time').timepicker();
+  if ($('.appointment_date').length && typeof $.fn.datepicker === 'function') {
+    $('.appointment_date').datepicker({
+      'format': 'm/d/yyyy',
+      'autoclose': true
+    });
+  }
+  if ($('.appointment_time').length && typeof $.fn.timepicker === 'function') {
+    $('.appointment_time').timepicker();
+  }
 
 
 

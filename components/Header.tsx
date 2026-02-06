@@ -22,13 +22,6 @@ export default function Header() {
     { href: ROUTES.contact, label: 'Contacto', pl0: false },
   ]
 
-  // Navigate with ?_=timestamp so the browser bypasses cache and the page loads fully
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const url = href === '/' ? `/?_=${Date.now()}` : `${href}?_=${Date.now()}`
-    window.location.href = url
-  }
-
   return (
     <>
       <div className="py-2 bg-primary">
@@ -74,7 +67,7 @@ export default function Header() {
       
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
         <div className="container d-flex align-items-center">
-          <a className="navbar-brand" href="/" onClick={(e) => handleNavClick(e, '/')}>
+          <a className="navbar-brand" href="/">
             <Image 
               src="/images/logo.png" 
               alt="New Moon Psicología en Evolución" 
@@ -98,7 +91,7 @@ export default function Header() {
             <ul className="navbar-nav ml-auto">
               {navLinks.map(({ href, label, pl0 }) => (
                 <li key={href} className={`nav-item ${isActive(href) ? 'active' : ''}`}>
-                  <a href={href} className={`nav-link ${pl0 ? 'pl-0' : ''}`} onClick={(e) => handleNavClick(e, href)}>{label}</a>
+                  <a href={href} className={`nav-link ${pl0 ? 'pl-0' : ''}`}>{label}</a>
                 </li>
               ))}
             </ul>
