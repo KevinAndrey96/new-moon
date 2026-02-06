@@ -42,8 +42,8 @@ if (DEBUG) {
 // Set environment variables
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
-// Usar siempre el puerto 3001 para que el proxy del .htaccess (127.0.0.1:3001) funcione.
-// Si necesitas otro puerto, define PORT en las variables de entorno de cPanel.
+// Always use port 3001 so the .htaccess proxy (127.0.0.1:3001) works.
+// If you need a different port, set PORT in cPanel environment variables.
 process.env.PORT = process.env.PORT || '3001';
 
 if (DEBUG) {

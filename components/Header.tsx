@@ -22,7 +22,7 @@ export default function Header() {
     { href: ROUTES.contact, label: 'Contacto', pl0: false },
   ]
 
-  // Navegar con ?_=timestamp para que el navegador no use caché y la página cargue completa
+  // Navigate with ?_=timestamp so the browser bypasses cache and the page loads fully
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const url = href === '/' ? `/?_=${Date.now()}` : `${href}?_=${Date.now()}`
