@@ -31,11 +31,8 @@ export default function ContactForm() {
     setSubmitStatus({ type: null, message: '' })
 
     try {
-      // Send data to AWS API Gateway
-      // Replace with your actual API Gateway URL
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://YOUR_API_GATEWAY_URL/prod/contact';
-      
-      const response = await fetch(apiUrl, {
+      // Send data to Next.js API route
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

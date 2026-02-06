@@ -35,6 +35,29 @@ export default function RootLayout({
         <link rel="stylesheet" href="/css/style.css" />
       </head>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function hideLoader() {
+                  var loader = document.getElementById('ftco-loader');
+                  if (loader) {
+                    loader.style.display = 'none';
+                    loader.classList.remove('show');
+                    loader.style.visibility = 'hidden';
+                    loader.style.opacity = '0';
+                  }
+                }
+                hideLoader();
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', hideLoader);
+                }
+                window.addEventListener('load', hideLoader);
+                setTimeout(hideLoader, 100);
+              })();
+            `,
+          }}
+        />
         {children}
         <WhatsAppButton />
         
@@ -65,8 +88,6 @@ export default function RootLayout({
         <Script src="/js/aos.js" strategy="afterInteractive" />
         <Script src="/js/jquery.animateNumber.min.js" strategy="afterInteractive" />
         <Script src="/js/scrollax.min.js" strategy="afterInteractive" />
-        {/* Google Maps is loaded dynamically by GoogleMap component */}
-        {/* <Script src="/js/google-map.js" strategy="afterInteractive" /> */}
         <Script src="/js/main.js" strategy="afterInteractive" />
       </body>
     </html>

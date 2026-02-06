@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { CONTACT_INFO, ROUTES } from '../lib/constants'
@@ -13,6 +12,21 @@ export default function Header() {
       return pathname === '/'
     }
     return pathname?.startsWith(path)
+  }
+
+  const navLinks = [
+    { href: ROUTES.home, label: 'Inicio', pl0: true },
+    { href: ROUTES.nosotros, label: 'Nosotros', pl0: false },
+    { href: ROUTES.colegios, label: 'Para Colegios', pl0: false },
+    { href: ROUTES.empresas, label: 'Para Empresas', pl0: false },
+    { href: ROUTES.contact, label: 'Contacto', pl0: false },
+  ]
+
+  // Navegar con ?_=timestamp para que el navegador no use caché y la página cargue completa
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const url = href === '/' ? `/?_=${Date.now()}` : `${href}?_=${Date.now()}`
+    window.location.href = url
   }
 
   return (
@@ -60,7 +74,7 @@ export default function Header() {
       
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
         <div className="container d-flex align-items-center">
-          <Link className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/" onClick={(e) => handleNavClick(e, '/')}>
             <Image 
               src="/images/logo.png" 
               alt="New Moon Psicología en Evolución" 
@@ -68,7 +82,7 @@ export default function Header() {
               height={80}
               style={{ height: '80px', maxWidth: '200px' }}
             />
-          </Link>
+          </a>
           <button 
             className="navbar-toggler" 
             type="button" 
@@ -82,21 +96,11 @@ export default function Header() {
           </button>
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="navbar-nav ml-auto">
-              <li className={`nav-item ${isActive(ROUTES.home) ? 'active' : ''}`}>
-                <Link href={ROUTES.home} className="nav-link pl-0">Inicio</Link>
-              </li>
-              <li className={`nav-item ${isActive(ROUTES.nosotros) ? 'active' : ''}`}>
-                <Link href={ROUTES.nosotros} className="nav-link">Nosotros</Link>
-              </li>
-              <li className={`nav-item ${isActive(ROUTES.colegios) ? 'active' : ''}`}>
-                <Link href={ROUTES.colegios} className="nav-link">Para Colegios</Link>
-              </li>
-              <li className={`nav-item ${isActive(ROUTES.empresas) ? 'active' : ''}`}>
-                <Link href={ROUTES.empresas} className="nav-link">Para Empresas</Link>
-              </li>
-              <li className={`nav-item ${isActive(ROUTES.contact) ? 'active' : ''}`}>
-                <Link href={ROUTES.contact} className="nav-link">Contacto</Link>
-              </li>
+              {navLinks.map(({ href, label, pl0 }) => (
+                <li key={href} className={`nav-item ${isActive(href) ? 'active' : ''}`}>
+                  <a href={href} className={`nav-link ${pl0 ? 'pl-0' : ''}`} onClick={(e) => handleNavClick(e, href)}>{label}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

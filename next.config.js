@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: 'standalone',
   reactStrictMode: true,
   images: {
     unoptimized: true, // Disable image optimization for cPanel compatibility
   },
-  // Static assets configuration
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
 }
 

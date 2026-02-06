@@ -5,7 +5,8 @@
   "scripts": {
     "copy-assets": "mkdir -p public/css public/js public/images public/fonts && cp -r website/css/* public/css/ && cp -r website/js/* public/js/ && cp -r website/images/* public/images/ && cp -r website/fonts/* public/fonts/",
     "dev": "npm run copy-assets && next dev",
-    "build": "npm run copy-assets && next build && cp .htaccess out/ 2>/dev/null || true",
+    "build": "npm run copy-assets && next build",
+    "postbuild": "mkdir -p _next/static && cp -r .next/static/* _next/static/ 2>/dev/null || true && (mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static 2>/dev/null; cp -r .next/static .next/standalone/.next/ 2>/dev/null || true) && (cp -r public .next/standalone/ 2>/dev/null || true)",
     "start": "node start-server.js",
     "lint": "next lint"
   },
@@ -16,7 +17,9 @@
     "typescript": "^4.9.5",
     "@types/node": "^16.18.0",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
+    "@types/react-dom": "^18.2.0",
+    "nodemailer": "^6.9.8",
+    "@types/nodemailer": "^6.4.14"
   }
 }
 

@@ -8,9 +8,9 @@ export default function Home() {
     <>
       <Header />
       
-      <section className="home-slider owl-carousel">
-        <div className="slider-item" style={{ backgroundImage: 'url(/images/bg_1.jpg)' }}>
-          <div className="overlay"></div>
+      <section className="home-slider owl-carousel" style={{ minHeight: '600px', position: 'relative' }}>
+        <div className="slider-item" style={{ backgroundImage: 'url(/images/bg_1.jpg)', minHeight: '600px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', position: 'relative' }}>
+          <div className="overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: '#000', opacity: 0.2 }}></div>
           <div className="container">
             <div className="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
               <div className="col-md-8 text-center ftco-animate">
@@ -26,8 +26,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="slider-item" style={{ backgroundImage: 'url(/images/bg_2.jpg)' }}>
-          <div className="overlay"></div>
+        <div className="slider-item" style={{ backgroundImage: 'url(/images/bg_2.jpg)', minHeight: '600px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', position: 'relative' }}>
+          <div className="overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: '#000', opacity: 0.2 }}></div>
           <div className="container">
             <div className="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
               <div className="col-md-8 text-center ftco-animate">
@@ -309,12 +309,31 @@ export default function Home() {
         </div>
       </section>
 
-      <div id="ftco-loader" className="show fullscreen">
+      <div id="ftco-loader" className="fullscreen" style={{ display: 'none' }}>
         <svg className="circular" width="48px" height="48px">
           <circle className="path-bg" cx="24" cy="24" r="22" fill="none" strokeWidth="4" stroke="#eeeeee"/>
           <circle className="path" cx="24" cy="24" r="22" fill="none" strokeWidth="4" strokeMiterlimit="10" stroke="#F96D00"/>
         </svg>
       </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              var loader = document.getElementById('ftco-loader');
+              if (loader) {
+                loader.style.display = 'none';
+                loader.classList.remove('show');
+              }
+              window.addEventListener('load', function() {
+                if (loader) {
+                  loader.style.display = 'none';
+                  loader.classList.remove('show');
+                }
+              });
+            })();
+          `,
+        }}
+      />
 
       <Footer />
     </>

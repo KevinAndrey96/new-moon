@@ -13,8 +13,8 @@ export default function NosotrosPage() {
     <>
       <Header />
       
-      <section className="hero-wrap hero-wrap-2" style={{ backgroundImage: "url('/images/bg_2.jpg')" }}>
-        <div className="overlay"></div>
+      <section className="hero-wrap hero-wrap-2" style={{ backgroundImage: "url('/images/bg_2.jpg')", minHeight: '300px', position: 'relative', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+        <div className="overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.3)' }}></div>
         <div className="container">
           <div className="row no-gutters slider-text align-items-center justify-content-center">
             <div className="col-md-9 ftco-animate text-center">
