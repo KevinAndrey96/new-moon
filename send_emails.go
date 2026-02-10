@@ -2,13 +2,17 @@ package main
 
 import (
 	"bufio"
+	"crypto/rand"
+	"encoding/base64"
 	"encoding/csv"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
 	"log"
 	"net/smtp"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -31,15 +35,20 @@ type EmailConfig struct {
 }
 
 func main() {
+	if err := loadEnvFile(".env.local"); err != nil {
+		log.Fatalf("loading .env.local: %v", err)
+	}
+
 	fmt.Println("==================================================")
 	fmt.Println("Bulk Email Sending System")
 	fmt.Println("New Moon Psicología en Evolución S.A.S.")
 	fmt.Println("==================================================")
 	fmt.Println()
 
-	// File paths
-	csvPath := "colegios_bogota.csv"
-	templatePath := "email_schools.html"
+	// File paths: template at public/emails/colegios-febrero/index.html
+	// Use colegios_bogota-test.csv for testing, colegios_bogota.csv for production
+	csvPath := "colegios_bogota-test.csv"
+	templatePath := "public/emails/colegios-febrero/index.html"
 
 	// Check if files exist
 	if _, err := os.Stat(csvPath); os.IsNotExist(err) {
@@ -54,8 +63,10 @@ func main() {
 	fmt.Printf("  CSV: %s\n", csvPath)
 	fmt.Printf("  Template: %s\n\n", templatePath)
 
-	// Get SMTP configuration from user
-	config := getSMTPConfig()
+	config, err := getSMTPConfigFromEnv()
+	if err != nil {
+		log.Fatalf("SMTP config: %v", err)
+	}
 
 	subjectTemplate := "Propuesta de apoyo neuropsicológico para {{.Nombre}}"
 
@@ -83,36 +94,66 @@ func main() {
 	}
 }
 
-func getSMTPConfig() EmailConfig {
-	reader := bufio.NewReader(os.Stdin)
-
-	fmt.Print("SMTP Server (e.g., smtp.gmail.com): ")
-	smtpHost, _ := reader.ReadString('\n')
-	smtpHost = strings.TrimSpace(smtpHost)
-
-	fmt.Print("SMTP Port (e.g., 587 for TLS): ")
-	smtpPort, _ := reader.ReadString('\n')
-	smtpPort = strings.TrimSpace(smtpPort)
-	if smtpPort == "" {
-		smtpPort = "587"
+func loadEnvFile(path string) error {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return err
 	}
 
-	fmt.Print("Your email address: ")
-	emailUser, _ := reader.ReadString('\n')
-	emailUser = strings.TrimSpace(emailUser)
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
 
-	fmt.Print("Your password or App Password: ")
-	emailPass, _ := reader.ReadString('\n')
-	emailPass = strings.TrimSpace(emailPass)
+		idx := strings.Index(line, "=")
+		if idx <= 0 {
+			continue
+		}
+
+		key := strings.TrimSpace(line[:idx])
+		val := strings.TrimSpace(line[idx+1:])
+		if key == "" {
+			continue
+		}
+
+		os.Setenv(key, val)
+	}
+
+	return nil
+}
+
+func getSMTPConfigFromEnv() (EmailConfig, error) {
+	host := strings.TrimSpace(os.Getenv("SMTP_HOST"))
+	port := strings.TrimSpace(os.Getenv("SMTP_PORT"))
+	user := strings.TrimSpace(os.Getenv("SMTP_USER"))
+	pass := os.Getenv("SMTP_PASSWORD")
+
+	if host == "" {
+		return EmailConfig{}, fmt.Errorf("SMTP_HOST not set in .env.local")
+	}
+
+	if port == "" {
+		port = "587"
+	}
+
+	if user == "" {
+		return EmailConfig{}, fmt.Errorf("SMTP_USER not set in .env.local")
+	}
+
+	if pass == "" {
+		return EmailConfig{}, fmt.Errorf("SMTP_PASSWORD not set in .env.local")
+	}
 
 	return EmailConfig{
-		SMTPHost:     smtpHost,
-		SMTPPort:     smtpPort,
-		EmailUser:    emailUser,
-		EmailPass:    emailPass,
+		SMTPHost:     host,
+		SMTPPort:     port,
+		EmailUser:    user,
+		EmailPass:    pass,
 		FromName:     "New Moon Psicología en Evolución S.A.S.",
 		DelaySeconds: 2,
-	}
+	}, nil
 }
 
 func loadTemplate(path string) (string, error) {
@@ -140,31 +181,89 @@ func createSubject(subjectTemplate string, colegio Colegio) string {
 	return subject
 }
 
-func sendEmail(config EmailConfig, toEmail string, subject string, htmlBody string) error {
-	// Configure authentication
-	auth := smtp.PlainAuth("", config.EmailUser, config.EmailPass, config.SMTPHost)
+var (
+	htmlTagRe    = regexp.MustCompile(`<[^>]*>`)
+	whitespaceRe = regexp.MustCompile(`\s+`)
+)
 
-	// Build message
-	from := fmt.Sprintf("%s <%s>", config.FromName, config.EmailUser)
-	headers := make(map[string]string)
-	headers["From"] = from
-	headers["To"] = toEmail
-	headers["Subject"] = subject
-	headers["MIME-Version"] = "1.0"
-	headers["Content-Type"] = "text/html; charset=UTF-8"
+func htmlToPlainText(html string) string {
+	s := htmlTagRe.ReplaceAllString(html, " ")
+	s = whitespaceRe.ReplaceAllString(s, " ")
 
-	// Build complete message
-	message := ""
-	for k, v := range headers {
-		message += fmt.Sprintf("%s: %s\r\n", k, v)
+	return strings.TrimSpace(s)
+}
+
+func base64Wrap(s string) string {
+	const lineLen = 76
+	var b strings.Builder
+	for i := 0; i < len(s); i += lineLen {
+		end := i + lineLen
+		if end > len(s) {
+			end = len(s)
+		}
+		b.WriteString(s[i:end])
+		if end < len(s) {
+			b.WriteString("\r\n")
+		}
 	}
-	message += "\r\n" + htmlBody
 
-	// Send email
+	return b.String()
+}
+
+func generateMessageID(host string) string {
+	b := make([]byte, 8)
+	if _, err := rand.Read(b); err != nil {
+		return fmt.Sprintf("<%d@%s>", time.Now().UnixNano(), host)
+	}
+
+	return fmt.Sprintf("<%d.%s@%s>", time.Now().UnixNano(), hex.EncodeToString(b), host)
+}
+
+func buildMessage(from, to, subject, htmlBody string) []byte {
+	plainBody := htmlToPlainText(htmlBody)
+	boundaryBytes := make([]byte, 16)
+	if _, err := rand.Read(boundaryBytes); err != nil {
+		boundaryBytes = []byte(fmt.Sprintf("%d", time.Now().UnixNano()))
+	}
+
+	boundary := "bound_" + hex.EncodeToString(boundaryBytes)
+	date := time.Now().Format(time.RFC1123Z)
+	messageID := generateMessageID("nmpsicologiaenevolucion.com")
+	unsubscribeMailto := "mailto:info@nmpsicologiaenevolucion.com?subject=Baja%20env%C3%ADos%20colegios"
+
+	plainB64 := base64.StdEncoding.EncodeToString([]byte(plainBody))
+	htmlB64 := base64.StdEncoding.EncodeToString([]byte(htmlBody))
+
+	var b strings.Builder
+	b.WriteString("From: " + from + "\r\n")
+	b.WriteString("To: " + to + "\r\n")
+	b.WriteString("Subject: " + subject + "\r\n")
+	b.WriteString("Date: " + date + "\r\n")
+	b.WriteString("Message-ID: " + messageID + "\r\n")
+	b.WriteString("Reply-To: " + from + "\r\n")
+	b.WriteString("List-Unsubscribe: <" + unsubscribeMailto + ">\r\n")
+	b.WriteString("MIME-Version: 1.0\r\n")
+	b.WriteString("Content-Type: multipart/alternative; boundary=\"" + boundary + "\"\r\n")
+	b.WriteString("\r\n--" + boundary + "\r\n")
+	b.WriteString("Content-Type: text/plain; charset=UTF-8\r\n")
+	b.WriteString("Content-Transfer-Encoding: base64\r\n")
+	b.WriteString("\r\n" + base64Wrap(plainB64) + "\r\n")
+	b.WriteString("--" + boundary + "\r\n")
+	b.WriteString("Content-Type: text/html; charset=UTF-8\r\n")
+	b.WriteString("Content-Transfer-Encoding: base64\r\n")
+	b.WriteString("\r\n" + base64Wrap(htmlB64) + "\r\n")
+	b.WriteString("--" + boundary + "--\r\n")
+
+	return []byte(b.String())
+}
+
+func sendEmail(config EmailConfig, toEmail string, subject string, htmlBody string) error {
+	auth := smtp.PlainAuth("", config.EmailUser, config.EmailPass, config.SMTPHost)
+	from := fmt.Sprintf("%s <%s>", config.FromName, config.EmailUser)
+	message := buildMessage(from, toEmail, subject, htmlBody)
 	addr := fmt.Sprintf("%s:%s", config.SMTPHost, config.SMTPPort)
-	err := smtp.SendMail(addr, auth, config.EmailUser, []string{toEmail}, []byte(message))
 
-	return err
+	return smtp.SendMail(addr, auth, config.EmailUser, []string{toEmail}, message)
 }
 
 func processAndSend(csvPath, templatePath, subjectTemplate string, config EmailConfig) error {

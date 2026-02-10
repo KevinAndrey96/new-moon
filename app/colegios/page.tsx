@@ -190,28 +190,6 @@ export default function ColegiosPage() {
             </div>
             <div className="col-md-6 order-md-first wrap-about py-5 wrap-about bg-light" style={{ marginTop: '2rem' }}>
               <div className="text px-4 ftco-animate">
-                <h2 className="mb-4">Marco Ético y <span>Normativo</span></h2>
-                <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
-                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Intervenciones Responsables:</strong>
-                    <span style={{ display: 'block' }}>Todas nuestras intervenciones están basadas en buenas prácticas profesionales y evidencia científica.</span>
-                  </li>
-                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Alineación Normativa:</strong>
-                    <span style={{ display: 'block' }}>Nuestros servicios están alineados con lineamientos de salud mental, educación y bienestar institucional vigentes.</span>
-                  </li>
-                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
-                    <strong style={{ display: 'block', marginBottom: '5px' }}>Confidencialidad y Respeto:</strong>
-                    <span style={{ display: 'block' }}>Garantizamos la confidencialidad, el respeto y un acompañamiento profesional en todos nuestros procesos.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-md-6 order-md-last wrap-about py-5 wrap-about bg-light">
-              <div className="text px-4 ftco-animate">
                 <h2 className="mb-4">Beneficios e <span>Impacto</span></h2>
                 <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
                   <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
@@ -240,6 +218,30 @@ export default function ColegiosPage() {
                     Su única inversión es la <span style={{ color: '#ff6b35' }}>referencia exclusiva</span>
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 py-5 bg-light">
+              <div className="text ftco-animate" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}>
+                <h2 className="mb-4">Marco Ético y <span>Normativo</span></h2>
+                <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px', marginLeft: 'auto', marginRight: 'auto', textAlign: 'left' }}>
+                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Intervenciones Responsables:</strong>
+                    <span style={{ display: 'block' }}>Todas nuestras intervenciones están basadas en buenas prácticas profesionales y evidencia científica.</span>
+                  </li>
+                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Alineación Normativa:</strong>
+                    <span style={{ display: 'block' }}>Nuestros servicios están alineados con lineamientos de salud mental, educación y bienestar institucional vigentes.</span>
+                  </li>
+                  <li style={{ marginBottom: '25px', paddingLeft: '35px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: '#ff6b35', fontSize: '24px', fontWeight: 'bold', top: 0 }}>✓</span>
+                    <strong style={{ display: 'block', marginBottom: '5px' }}>Confidencialidad y Respeto:</strong>
+                    <span style={{ display: 'block' }}>Garantizamos la confidencialidad, el respeto y un acompañamiento profesional en todos nuestros procesos.</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
